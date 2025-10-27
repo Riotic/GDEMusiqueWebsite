@@ -5,7 +5,7 @@ echo "🎵 Starting GDE Backend..."
 
 # Exécuter le seed
 echo "📦 Running database seed..."
-python seed_data.py
+python3 seed_data.py
 
 # Démarrer uvicorn
 echo "🚀 Starting uvicorn on port ${PORT:-8000}..."
