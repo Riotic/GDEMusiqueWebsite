@@ -23,7 +23,6 @@ EXPOSE 8000
 
 # Variables d'environnement par défaut
 ENV PYTHONUNBUFFERED=1
-ENV DATABASE_URL=postgresql://gde_user:gde_password@postgres:5432/gde_music
 
 # Script de démarrage qui fait seed PUIS uvicorn
 CMD python seed_data.py && uvicorn backend.main:app --host 0.0.0.0 --port ${PORT:-8000}
