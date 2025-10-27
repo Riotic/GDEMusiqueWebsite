@@ -14,9 +14,13 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY backend/ ./backend/
 COPY run.py .
 COPY seed_data.py .
+COPY docker/start-backend.sh /start-backend.sh
 
 # Créer le dossier pour les uploads
 RUN mkdir -p /app/backend/media/uploads
+
+# Rendre le script exécutable
+RUN chmod +x /start-backend.sh
 
 # Exposer le port
 EXPOSE 8000
@@ -24,5 +28,5 @@ EXPOSE 8000
 # Variables d'environnement par défaut
 ENV PYTHONUNBUFFERED=1
 
-# Script de démarrage qui fait seed PUIS uvicorn
-CMD python seed_data.py && uvicorn backend.main:app --host 0.0.0.0 --port ${PORT:-8000}
+# Script de démarrage
+CMD ["/start-backend.sh"]
