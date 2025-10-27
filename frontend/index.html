@@ -25,7 +25,20 @@
                 <li><a href="#evenements" class="nav-link">Événements</a></li>
                 <li><a href="#communaute" class="nav-link">Communauté</a></li>
                 <li><a href="#contact" class="nav-link">Contact</a></li>
-                <li><a href="#" class="btn-nav-cta">Réserver un cours</a></li>
+                
+                <!-- Liens authentifiés (cachés par défaut) -->
+                <li class="auth-only" style="display: none;"><a href="#mes-cours" class="nav-link">Mes Cours</a></li>
+                <li class="auth-only" style="display: none;"><a href="#planning" class="nav-link">Planning</a></li>
+                <li class="auth-only" style="display: none;"><a href="#marketplace" class="nav-link">Marketplace</a></li>
+                
+                <!-- Boutons auth -->
+                <li class="guest-only"><a href="#" class="btn-nav-cta" id="loginBtn">Connexion</a></li>
+                <li class="auth-only" style="display: none;">
+                    <a href="#" class="nav-link" id="userEmail"></a>
+                </li>
+                <li class="auth-only" style="display: none;">
+                    <a href="#" class="btn-nav-cta" id="logoutBtn">Déconnexion</a>
+                </li>
             </ul>
         </div>
     </nav>
@@ -193,6 +206,188 @@
         </div>
     </section>
 
+    <!-- Mes Cours Section (Auth Only) -->
+    <section id="mes-cours" class="my-courses-section auth-only" style="display: none;">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Mes Cours</h2>
+                <p class="section-subtitle">Vos cours selon vos instruments</p>
+                <button class="btn-secondary" id="selectInstrumentsBtn">
+                    <i class="fas fa-guitar"></i> Choisir mes instruments
+                </button>
+            </div>
+            <div id="myCoursesContainer"></div>
+        </div>
+    </section>
+
+    <!-- Marketplace Section (Auth Only) -->
+    <section id="marketplace" class="marketplace-section auth-only" style="display: none;">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Marketplace</h2>
+                <p class="section-subtitle">Instruments et équipements à vendre</p>
+                <button class="btn-secondary admin-only" id="addMarketplaceItemBtn" style="display: none;">
+                    <i class="fas fa-plus"></i> Ajouter un article
+                </button>
+            </div>
+            <div id="marketplaceItemsContainer" class="marketplace-grid"></div>
+        </div>
+    </section>
+
+    <!-- Planning Section (Auth Only) -->
+    <section id="planning" class="schedule-section auth-only" style="display: none;">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Mon Planning</h2>
+                <p class="section-subtitle">Votre emploi du temps de la semaine</p>
+                <button class="btn-secondary" id="addScheduleBtn">
+                    <i class="fas fa-plus"></i> Ajouter un événement
+                </button>
+            </div>
+            <div id="scheduleContainer"></div>
+            
+            <!-- Liste des élèves (Teacher Only) -->
+            <div id="studentsListContainer" class="teacher-only" style="display: none; margin-top: 3rem;">
+                <h3 class="section-subtitle">Mes Élèves</h3>
+                <div id="studentsList"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modales -->
+    <!-- Modal Login/Register -->
+    <div id="authModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <div class="modal-tabs">
+                <button class="tab-btn active" data-tab="login">Connexion</button>
+                <button class="tab-btn" data-tab="register">Inscription</button>
+            </div>
+            
+            <!-- Login Form -->
+            <form id="loginForm" class="tab-content active">
+                <h2>Connexion</h2>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="loginEmail" required>
+                </div>
+                <div class="form-group">
+                    <label>Mot de passe</label>
+                    <input type="password" id="loginPassword" required>
+                </div>
+                <button type="submit" class="btn-primary">Se connecter</button>
+                <p class="form-hint">Compte de test : admin@gde-musique.fr / admin123</p>
+            </form>
+            
+            <!-- Register Form -->
+            <form id="registerForm" class="tab-content">
+                <h2>Inscription</h2>
+                <div class="form-group">
+                    <label>Nom d'utilisateur</label>
+                    <input type="text" id="registerUsername" required>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="registerEmail" required>
+                </div>
+                <div class="form-group">
+                    <label>Prénom</label>
+                    <input type="text" id="registerFirstName">
+                </div>
+                <div class="form-group">
+                    <label>Nom</label>
+                    <input type="text" id="registerLastName">
+                </div>
+                <div class="form-group">
+                    <label>Mot de passe</label>
+                    <input type="password" id="registerPassword" required>
+                </div>
+                <button type="submit" class="btn-primary">S'inscrire</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal Lesson Details -->
+    <div id="lessonModal" class="modal">
+        <div class="modal-content modal-large">
+            <span class="modal-close">&times;</span>
+            <div id="lessonDetailsContent"></div>
+        </div>
+    </div>
+
+    <!-- Modal Instrument Selection -->
+    <div id="instrumentModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <h2>Choisir vos instruments</h2>
+            <div id="instrumentSelectionGrid"></div>
+            <button class="btn-primary" id="saveInstrumentsBtn">Enregistrer</button>
+        </div>
+    </div>
+
+    <!-- Modal Add Marketplace Item -->
+    <div id="addMarketplaceModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <h2>Ajouter un article</h2>
+            <form id="addMarketplaceForm">
+                <div class="form-group">
+                    <label>Titre</label>
+                    <input type="text" id="marketplaceTitle" required>
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea id="marketplaceDescription" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Prix (€)</label>
+                    <input type="number" id="marketplacePrice" min="0" step="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label>URL de l'image</label>
+                    <input type="text" id="marketplaceImageUrl">
+                </div>
+                <button type="submit" class="btn-primary">Ajouter</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal Add Schedule Item -->
+    <div id="addScheduleModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <h2>Ajouter un événement</h2>
+            <form id="addScheduleForm">
+                <div class="form-group">
+                    <label>Titre</label>
+                    <input type="text" id="scheduleTitle" required>
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea id="scheduleDescription" rows="2"></textarea>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Début</label>
+                        <input type="datetime-local" id="scheduleStartTime" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Fin</label>
+                        <input type="datetime-local" id="scheduleEndTime" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Rappel / Sujet à réviser</label>
+                    <textarea id="scheduleReminder" rows="2" placeholder="Ex: Travailler les accords de Do Majeur"></textarea>
+                </div>
+                <button type="submit" class="btn-primary">Ajouter</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="toast"></div>
+
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
@@ -242,13 +437,10 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <script src="/static/js/app.js"></script>
-    <script src="/static/js/animations.js"></script>
-</body>
-</html>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="/static/js/auth.js"></script>
+    <script src="/static/js/courses.js"></script>
+    <script src="/static/js/marketplace.js"></script>
+    <script src="/static/js/schedule.js"></script>
     <script src="/static/js/app.js"></script>
     <script src="/static/js/animations.js"></script>
 </body>

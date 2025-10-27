@@ -13,6 +13,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copier le code de l'application
 COPY backend/ ./backend/
 COPY run.py .
+COPY seed_data.py .
 
 # Créer le dossier pour les uploads
 RUN mkdir -p /app/backend/media/uploads

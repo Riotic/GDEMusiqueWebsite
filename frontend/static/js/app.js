@@ -12,6 +12,16 @@ if (mobileMenuToggle) {
         icon.classList.toggle('fa-bars');
         icon.classList.toggle('fa-times');
     });
+    
+    // Fermer le menu mobile quand on clique sur un lien
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+            navLinks.classList.remove('active');
+            const icon = mobileMenuToggle.querySelector('i');
+            icon.classList.add('fa-bars');
+            icon.classList.remove('fa-times');
+        });
+    });
 }
 
 // Smooth scroll pour les liens de navigation
@@ -206,4 +216,32 @@ newsletterForms.forEach(form => {
 document.addEventListener('DOMContentLoaded', () => {
     loadCourses();
     loadEvents();
+    
+    // Initialiser l'authentification
+    if (typeof AuthService !== 'undefined') {
+        window.authService = new AuthService();
+    }
+    
+    // Initialiser les autres modules si l'utilisateur est connecté
+    if (window.authService && window.authService.isAuthenticated()) {
+        // Charger les cours de l'utilisateur
+        if (typeof loadMyCourses !== 'undefined') {
+            loadMyCourses();
+        }
+        
+        // Charger le marketplace
+        if (typeof loadMarketplaceItems !== 'undefined') {
+            loadMarketplaceItems();
+        }
+        
+        // Charger le planning
+        if (typeof loadSchedule !== 'undefined') {
+            loadSchedule();
+        }
+        
+        // Charger la liste des étudiants pour les profs
+        if (window.authService.hasRole('teacher') && typeof loadStudentsList !== 'undefined') {
+            loadStudentsList();
+        }
+    }
 });
