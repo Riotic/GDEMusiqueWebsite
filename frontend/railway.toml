@@ -1,6 +1,7 @@
 [build]
 builder = "DOCKERFILE"
 dockerfilePath = "frontend/Dockerfile"
+dockerContext = "."
 
 [deploy]
 startCommand = "/start-frontend.sh"
