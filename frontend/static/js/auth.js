@@ -2,7 +2,7 @@
 // Détecter l'environnement automatiquement
 const API_URL = window.location.hostname === 'localhost' 
     ? 'http://localhost:8000/api'
-    : 'https://gdemusique-backend-production.up.railway.app/api'; // URL Railway du backend
+    : 'https://gde-backend-production.up.railway.app/api'; // URL Railway du backend
 
 class AuthService {
     constructor() {
