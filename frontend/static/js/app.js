@@ -1,7 +1,5 @@
-// API Base URL - Détection automatique environnement
-const API_URL = window.location.hostname === 'localhost' 
-    ? 'http://localhost:8000/api'
-    : 'https://gde-backend-production.up.railway.app/api'; // URL Railway du backend
+// API Base URL - Chargé depuis config.js
+const API_URL = window.CONFIG?.API_URL || 'http://localhost:8000/api';
 
 // Mobile menu toggle
 const mobileMenuToggle = document.getElementById('mobileMenuToggle');
