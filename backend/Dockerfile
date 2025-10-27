@@ -10,8 +10,8 @@ COPY requirements.txt .
 # Installer les dépendances
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copier le code de l'application depuis backend/
-COPY backend/ ./backend/
+# Copier le code de l'application (le dossier backend/ dans le context)
+COPY ./ ../backend/
 COPY seed_data.py .
 COPY start-backend.sh /start-backend.sh
 
