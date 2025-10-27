@@ -1,17 +1,15 @@
 # Frontend Dockerfile avec Nginx
 FROM nginx:alpine
 
-# DEBUG: Afficher le contenu du context
-RUN echo "=== Contenu du context Docker ===" && ls -la
+# Copier les fichiers frontend (HTML/CSS/JS)
+COPY static/ /usr/share/nginx/html/static/
+COPY index.html /usr/share/nginx/html/
 
-# Copier les fichiers frontend
-COPY frontend/ /usr/share/nginx/html/
-
-# Copier la configuration Nginx personnalisée  
-COPY docker/nginx.conf /etc/nginx/conf.d/default.conf
+# Copier la configuration Nginx
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # Copier le script de démarrage
-COPY ./frontend/start-frontend.sh /start-frontend.sh
+COPY start-frontend.sh /start-frontend.sh
 RUN chmod +x /start-frontend.sh
 
 # Exposer le port 80

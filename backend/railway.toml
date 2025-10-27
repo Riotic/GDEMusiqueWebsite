@@ -1,7 +1,7 @@
 [build]
 builder = "DOCKERFILE"
 dockerfilePath = "backend/Dockerfile"
-dockerContext = "."
+dockerContext = "backend"
 
 [deploy]
 startCommand = "/start-backend.sh"
