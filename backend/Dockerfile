@@ -10,12 +10,15 @@ COPY ./requirements.txt .
 # Installer les dépendances
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copier le code de l'application
-CMD ["ls"]
+# DEBUG: Lister les fichiers à la racine du context
+RUN echo "📂 Contenu de la racine du context:" && ls -la /
 
+# Copier le code de l'application
 COPY ./backend/ ./backend/
-COPY seed_data.py .
-COPY start-backend.sh /start-backend.sh
+RUN echo "📂 Contenu de /app après COPY backend:" && ls -la /app
+COPY backend/seed_data.py .
+RUN echo "📂 Contenu de /app après COPY seed:" && ls -la /app
+COPY backend/start-backend.sh /start-backend.sh
 
 # Créer le dossier pour les uploads
 RUN mkdir -p /app/backend/media/uploads

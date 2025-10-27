@@ -1,9 +1,10 @@
 # Frontend Dockerfile avec Nginx
 FROM nginx:alpine
 
-# Copier les fichiers frontend
-CMD ["ls"]
+# DEBUG: Afficher le contenu du context
+RUN echo "=== Contenu du context Docker ===" && ls -la
 
+# Copier les fichiers frontend
 COPY frontend/ /usr/share/nginx/html/
 
 # Copier la configuration Nginx personnalisée  
