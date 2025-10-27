@@ -13,9 +13,16 @@ app = FastAPI(
 )
 
 # Configuration CORS
+import os
+FRONTEND_URL = os.getenv("FRONTEND_URL", "http://localhost:3000")
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # À restreindre en production
+    allow_origins=[
+        "http://localhost:3000",  # Local Docker
+        "http://localhost",       # Local Dev
+        FRONTEND_URL,             # Railway Frontend
+        "https://gdemusique-frontend-production.up.railway.app",  # Railway Frontend URL
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

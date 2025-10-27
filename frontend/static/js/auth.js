@@ -1,5 +1,8 @@
 // Gestion de l'authentification
-const API_URL = 'http://localhost:8000/api';
+// Détecter l'environnement automatiquement
+const API_URL = window.location.hostname === 'localhost' 
+    ? 'http://localhost:8000/api'
+    : 'https://gdemusique-backend-production.up.railway.app/api'; // URL Railway du backend
 
 class AuthService {
     constructor() {
