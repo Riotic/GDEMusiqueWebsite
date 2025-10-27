@@ -1,0 +1,73 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: gde_postgres_prod
+    restart: always
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - gde_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    container_name: gde_backend_prod
+    restart: always
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
+      SECRET_KEY: ${SECRET_KEY}
+      DEBUG: "False"
+      ALLOWED_ORIGINS: ${ALLOWED_ORIGINS}
+    volumes:
+      - media_files:/app/backend/media
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - gde_network
+    command: >
+      sh -c "
+        echo 'Waiting for postgres...' &&
+        sleep 5 &&
+        uvicorn backend.main:app --host 0.0.0.0 --port 8000 --workers 4
+      "
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    container_name: gde_frontend_prod
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - backend
+    networks:
+      - gde_network
+    volumes:
+      # Monter les certificats SSL si disponibles
+      # - ./ssl:/etc/nginx/ssl:ro
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+
+volumes:
+  postgres_data:
+    driver: local
+  media_files:
+    driver: local
+
+networks:
+  gde_network:
+    driver: bridge

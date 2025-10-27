@@ -1,0 +1,28 @@
+# Backend Dockerfile pour FastAPI
+FROM python:3.11-slim
+
+# Définir le répertoire de travail
+WORKDIR /app
+
+# Copier les fichiers de requirements
+COPY requirements.txt .
+
+# Installer les dépendances
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copier le code de l'application
+COPY backend/ ./backend/
+COPY run.py .
+
+# Créer le dossier pour les uploads
+RUN mkdir -p /app/backend/media/uploads
+
+# Exposer le port
+EXPOSE 8000
+
+# Variables d'environnement par défaut
+ENV PYTHONUNBUFFERED=1
+ENV DATABASE_URL=postgresql://gde_user:gde_password@postgres:5432/gde_music
+
+# Commande de démarrage
+CMD ["uvicorn", "backend.main:app", "--host", "0.0.0.0", "--port", "8000"]

@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GDE Musique - L'École de Musique d'Excellence</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <img src="/static/images/gdemusique1.png" alt="GDE Musique" class="logo-img">
+                <span class="logo-text">GDE Musique</span>
+            </div>
+            <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#accueil" class="nav-link">Accueil</a></li>
+                <li><a href="#apropos" class="nav-link">À propos</a></li>
+                <li><a href="#cours" class="nav-link">Cours</a></li>
+                <li><a href="#evenements" class="nav-link">Événements</a></li>
+                <li><a href="#communaute" class="nav-link">Communauté</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+                <li><a href="#" class="btn-nav-cta">Réserver un cours</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="accueil" class="hero-section">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">L'École GDE Musique</h1>
+            <p class="hero-subtitle">Votre passion pour la musique commence ici</p>
+            <div class="hero-buttons">
+                <a href="#cours" class="btn-hero-primary">Découvrir nos cours</a>
+                <a href="#contact" class="btn-hero-secondary">Nous contacter</a>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- À propos Section -->
+    <section id="apropos" class="about-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">À propos de nous</h2>
+                <p class="section-subtitle">Une école de musique d'excellence depuis plus de 20 ans</p>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>L'école GDE Musique est un lieu d'apprentissage et de partage où la passion pour la musique se cultive au quotidien. Nos professeurs expérimentés vous accompagnent dans votre parcours musical, que vous soyez débutant ou musicien confirmé.</p>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-number">500+</div>
+                            <div class="stat-label">Élèves</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">25+</div>
+                            <div class="stat-label">Professeurs</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">15+</div>
+                            <div class="stat-label">Instruments</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">20+</div>
+                            <div class="stat-label">Années</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <img src="/static/images/gdemusique1.png" alt="GDE Musique">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cours Section -->
+    <section id="cours" class="courses-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Nos Cours</h2>
+                <p class="section-subtitle">Choisissez l'instrument qui vous correspond</p>
+            </div>
+            <div class="courses-grid" id="coursesGrid">
+                <!-- Sera rempli dynamiquement -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Événements Section -->
+    <section id="evenements" class="events-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Événements à venir</h2>
+                <p class="section-subtitle">Rejoignez-nous lors de nos prochains concerts et masterclasses</p>
+            </div>
+            <div class="events-grid" id="eventsGrid">
+                <!-- Sera rempli dynamiquement -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Communauté Section -->
+    <section id="communaute" class="community-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Notre Communauté</h2>
+                <p class="section-subtitle">Rejoignez une communauté passionnée de musiciens</p>
+            </div>
+            <div class="community-content">
+                <div class="community-features">
+                    <div class="feature-card">
+                        <i class="fas fa-users feature-icon"></i>
+                        <h3>Réseau d'artistes</h3>
+                        <p>Connectez-vous avec d'autres musiciens et partagez votre passion</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-calendar-alt feature-icon"></i>
+                        <h3>Événements exclusifs</h3>
+                        <p>Accédez à des concerts, masterclasses et jam sessions</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-trophy feature-icon"></i>
+                        <h3>Concours & performances</h3>
+                        <p>Participez à des compétitions et showcases</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-book feature-icon"></i>
+                        <h3>Ressources pédagogiques</h3>
+                        <p>Accédez à notre bibliothèque de partitions et tutoriels</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Contactez-nous</h2>
+                <p class="section-subtitle">Une question ? N'hésitez pas à nous contacter</p>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="info-card">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <h3>Adresse</h3>
+                        <p>123 Rue de la Musique<br>75000 Paris, France</p>
+                    </div>
+                    <div class="info-card">
+                        <i class="fas fa-phone"></i>
+                        <h3>Téléphone</h3>
+                        <p>+33 1 23 45 67 89</p>
+                    </div>
+                    <div class="info-card">
+                        <i class="fas fa-envelope"></i>
+                        <h3>Email</h3>
+                        <p>contact@gdemusique.fr</p>
+                    </div>
+                    <div class="info-card">
+                        <i class="fas fa-clock"></i>
+                        <h3>Horaires</h3>
+                        <p>Lun - Ven: 9h - 20h<br>Sam: 10h - 18h</p>
+                    </div>
+                </div>
+                <form class="contact-form" id="contactForm">
+                    <div class="form-row">
+                        <input type="text" placeholder="Nom" required>
+                        <input type="text" placeholder="Prénom" required>
+                    </div>
+                    <input type="email" placeholder="Email" required>
+                    <input type="tel" placeholder="Téléphone">
+                    <select required>
+                        <option value="">Sujet de votre demande</option>
+                        <option value="cours">Inscription aux cours</option>
+                        <option value="info">Demande d'information</option>
+                        <option value="event">Événements</option>
+                        <option value="autre">Autre</option>
+                    </select>
+                    <textarea placeholder="Votre message" rows="5" required></textarea>
+                    <button type="submit" class="btn-submit">Envoyer</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <img src="/static/images/gdemusique1.png" alt="GDE Musique" class="footer-logo">
+                    <p>L'école de musique d'excellence qui fait vibrer votre passion depuis 20 ans.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="#accueil">Accueil</a></li>
+                        <li><a href="#apropos">À propos</a></li>
+                        <li><a href="#cours">Cours</a></li>
+                        <li><a href="#evenements">Événements</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Informations</h4>
+                    <ul>
+                        <li><a href="#">Tarifs</a></li>
+                        <li><a href="#">Règlement intérieur</a></li>
+                        <li><a href="#">Mentions légales</a></li>
+                        <li><a href="#">CGV</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Newsletter</h4>
+                    <p>Restez informé de nos actualités</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Votre email">
+                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 GDE Musique. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="/static/js/app.js"></script>
+    <script src="/static/js/animations.js"></script>
+</body>
+</html>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="/static/js/app.js"></script>
+    <script src="/static/js/animations.js"></script>
+</body>
+</html>

@@ -205,3 +205,29 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# =======================================
+# GDE Music Platform Specific
+# =======================================
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+gde_music.db
+
+# Media files (uploaded by users)
+backend/media/uploads/*
+!backend/media/uploads/.gitkeep
+
+# Static files (generated)
+backend/static/generated/*
+
+# Node modules (si on utilise des outils de build)
+node_modules/
+package-lock.json
+yarn.lock
+
+# OS specific
+.DS_Store
+Thumbs.db

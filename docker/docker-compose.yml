@@ -1,0 +1,80 @@
+version: '3.8'
+
+services:
+  # Base de données PostgreSQL
+  postgres:
+    image: postgres:15-alpine
+    container_name: gde_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: gde_music
+      POSTGRES_USER: gde_user
+      POSTGRES_PASSWORD: gde_password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "15432:5432"
+    networks:
+      - gde_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U gde_user -d gde_music"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Backend FastAPI
+  backend:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.backend
+    container_name: gde_backend
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: postgresql://gde_user:gde_password@postgres:5432/gde_music
+      SECRET_KEY: ${SECRET_KEY:-your-secret-key-change-in-production}
+      DEBUG: ${DEBUG:-False}
+      ALLOWED_ORIGINS: http://localhost,http://localhost:3000,http://frontend
+    volumes:
+      - ../backend:/app/backend
+      - media_files:/app/backend/media
+    ports:
+      - "8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - gde_network
+    command: >
+      sh -c "
+        echo 'Waiting for postgres...' &&
+        sleep 5 &&
+        uvicorn backend.main:app --host 0.0.0.0 --port 8000 --reload
+      "
+
+  # Frontend Nginx
+  frontend:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.frontend
+    container_name: gde_frontend
+    restart: unless-stopped
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    networks:
+      - gde_network
+    volumes:
+      - ../frontend:/usr/share/nginx/html:ro
+
+# Volumes pour la persistance des données
+volumes:
+  postgres_data:
+    driver: local
+  media_files:
+    driver: local
+
+# Réseau pour la communication entre services
+networks:
+  gde_network:
+    driver: bridge
