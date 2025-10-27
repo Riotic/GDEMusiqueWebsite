@@ -2,6 +2,8 @@
 FROM nginx:alpine
 
 # Copier les fichiers frontend
+CMD ["ls"]
+
 COPY frontend/ /usr/share/nginx/html/
 
 # Copier la configuration Nginx personnalisée  
