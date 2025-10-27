@@ -44,7 +44,8 @@ logs/
 .coverage
 htmlcov/
 
-# Documentation
+# Documentation (except README)
+docs/
 *.md
 !README.md
 
@@ -52,10 +53,10 @@ htmlcov/
 .DS_Store
 Thumbs.db
 
-# Docker
+# Docker (exclude only docker-compose, not Dockerfiles!)
 docker-compose.yml
-Dockerfile*
-.dockerignore
+docker-compose.*.yml
 
-# Media (will be in volumes)
+# Media uploads (will be in volumes)
 backend/media/uploads/*
+!backend/media/uploads/.gitkeep
