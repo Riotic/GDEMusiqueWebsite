@@ -5,13 +5,13 @@ FROM python:3.11-slim
 WORKDIR /app
 
 # Copier les fichiers de requirements (depuis la racine du repo)
-COPY ../requirements.txt .
+COPY ./requirements.txt .
 
 # Installer les dépendances
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copier le code de l'application
-COPY backend/ ./backend/
+COPY ./backend/ ./backend/
 COPY seed_data.py .
 COPY start-backend.sh /start-backend.sh
 
