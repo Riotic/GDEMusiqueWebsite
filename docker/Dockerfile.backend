@@ -11,9 +11,8 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copier le code de l'application
-COPY backend/ ./backend/
-COPY run.py .
-COPY seed_data.py .
+COPY backend/backend/ ./backend/
+COPY backend/seed_data.py .
 COPY docker/start-backend.sh /start-backend.sh
 
 # Créer le dossier pour les uploads
