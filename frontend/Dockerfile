@@ -5,8 +5,8 @@ FROM nginx:alpine
 COPY static/ /usr/share/nginx/html/static/
 COPY index.html /usr/share/nginx/html/
 
-# Copier la configuration Nginx
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+# Copier la configuration Nginx (Railway version sans proxy backend)
+COPY nginx.railway.conf /etc/nginx/conf.d/default.conf
 
 # Copier le script de démarrage
 COPY start-frontend.sh /start-frontend.sh

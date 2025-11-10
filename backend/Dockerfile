@@ -10,8 +10,9 @@ COPY requirements.txt .
 # Installer les dépendances
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copier le code de l'application (le dossier backend/ dans le context)
-COPY ./ ../backend/
+# Copier le code de l'application
+# Avec dockerContext="backend", le contexte root contient: backend/, seed_data.py, etc.
+COPY backend/ /app/backend/
 COPY seed_data.py .
 COPY start-backend.sh /start-backend.sh
 
