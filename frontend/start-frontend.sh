@@ -17,6 +17,12 @@ console.log('✅ Config chargée:', window.CONFIG);
 EOF
 
 echo "✅ Config généré avec BACKEND_URL=${BACKEND_URL}"
+
+# Configurer le port Nginx depuis la variable Railway
+PORT=${PORT:-80}
+echo "📡 Configuration du port: $PORT"
+sed -i "s/listen 80;/listen $PORT;/g" /etc/nginx/conf.d/default.conf
+
 echo "🚀 Démarrage de Nginx..."
 
 # Démarrer Nginx
