@@ -23,9 +23,8 @@ def seed_database():
     try:
         # Vérifier si la base est déjà peuplée
         if db.query(User).first():
-            print("La base de données contient déjà des données. Suppression...")
-            Base.metadata.drop_all(bind=engine)
-            Base.metadata.create_all(bind=engine)
+            print("✅ La base de données contient déjà des données. Seed skippé.")
+            return
         
         print("🎵 Peuplement de la base de données GDE Musique...")
         
